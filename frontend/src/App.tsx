@@ -1,8 +1,9 @@
+import FormBuilder from "./FormBuilder"
 
 function App() {
   return (
     <>
-      Hello everyone
+      <FormBuilder/>
     </>
   )
 }
