@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -44,12 +44,18 @@ const Form = mongoose.model("Form", FormSchema);
 // Routes
 // Create a new form
 app.post("/forms", async (req: Request, res: Response): Promise<void> => {
+    console.log(req.body);
+    
     try {
+        const { nanoid } = await import('nanoid');
         const formLink = nanoid(10); // Generates a 10-character unique string
         const form = new Form({
             ...req.body,
             formLink,
         });
+
+        console.log("form", form);
+        
 
         await form.save();
         res.status(201).json({ form, link: `http://localhost:5173/forms/${formLink}` });
